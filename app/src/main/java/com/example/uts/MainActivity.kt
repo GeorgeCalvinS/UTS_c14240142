@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupCategoryChips() {
-        val categories = listOf("Semua", "Kopi", "Frappe", "Makanan")
+        val categories = listOf("Semua", "Kopi", "Frappe", "Special Dish")
         chipContainer.removeAllViews()
 
         for (category in categories) {

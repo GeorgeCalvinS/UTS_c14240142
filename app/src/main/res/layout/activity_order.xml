@@ -16,18 +16,18 @@
         android:padding="24dp">
 
         <TextView
-            android:id="@+id/tvOrderHeaderTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/tvOrderHeaderTitle"
             android:text="Detail Pesanan"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvOrderHeaderSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/tvOrderHeaderSubtitle"
             android:layout_marginTop="4dp"
             android:text="Halaman Pesanan"
             android:textColor="@color/cafe_accent_light"
@@ -35,9 +35,9 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvSelectedMenuInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/tvSelectedMenuInfo"
         android:layout_margin="16dp"
         android:textColor="@color/cafe_text_title"
         android:textSize="18sp"

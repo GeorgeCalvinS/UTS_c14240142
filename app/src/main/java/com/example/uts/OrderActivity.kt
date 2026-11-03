@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class OrderActivity : AppCompatActivity() {
+    //1b
 
     private lateinit var tvSelectedMenuInfo: TextView
 
