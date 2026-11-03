@@ -26,6 +26,11 @@
             android:name=".OrderActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".OrderListActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

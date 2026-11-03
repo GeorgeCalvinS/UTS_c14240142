@@ -1,15 +1,20 @@
 package com.example.uts
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -29,10 +34,14 @@ class OrderActivity : AppCompatActivity() {
     private lateinit var tvSubtotal: TextView
     private lateinit var tvDiscount: TextView
     private lateinit var tvGrandTotal: TextView
+    private lateinit var btnConfirmOrder: Button
 
     private var menuName: String = ""
     private var unitPrice: Int = 0
     private var currentQty: Int = 1
+    private var currentSubtotal: Int = 0
+    private var currentDiscount: Int = 0
+    private var currentGrandTotal: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +66,7 @@ class OrderActivity : AppCompatActivity() {
         tvSubtotal = findViewById(R.id.tvSubtotal)
         tvDiscount = findViewById(R.id.tvDiscount)
         tvGrandTotal = findViewById(R.id.tvGrandTotal)
+        btnConfirmOrder = findViewById(R.id.btnConfirmOrder)
 
         menuName = intent.getStringExtra(EXTRA_MENU_NAME) ?: ""
         unitPrice = intent.getIntExtra(EXTRA_MENU_PRICE, 0)
@@ -100,19 +110,73 @@ class OrderActivity : AppCompatActivity() {
             calculateTotal()
         }
 
+        btnConfirmOrder.setOnClickListener {
+            if (currentQty <= 0) {
+                Toast.makeText(this, "Jumlah porsi minimal 1", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            showCustomerNameDialog()
+        }
+
         calculateTotal()
     }
 
     private fun calculateTotal() {
         val qty = etQty.text.toString().toIntOrNull() ?: 0
-        val subtotal = unitPrice * qty
+        currentSubtotal = unitPrice * qty
         val isMember = rbMember.isChecked
-        val discount = if (isMember) (subtotal * 0.10).toInt() else 0
-        val grandTotal = subtotal - discount
+        currentDiscount = if (isMember) (currentSubtotal * 0.10).toInt() else 0
+        currentGrandTotal = currentSubtotal - currentDiscount
 
-        tvSubtotal.text = CurrencyHelper.formatRupiah(subtotal)
-        tvDiscount.text = if (discount > 0) "- ${CurrencyHelper.formatRupiah(discount)}" else "Rp0"
-        tvGrandTotal.text = CurrencyHelper.formatRupiah(grandTotal)
+        tvSubtotal.text = CurrencyHelper.formatRupiah(currentSubtotal)
+        tvDiscount.text = if (currentDiscount > 0) "- ${CurrencyHelper.formatRupiah(currentDiscount)}" else "Rp0"
+        tvGrandTotal.text = CurrencyHelper.formatRupiah(currentGrandTotal)
+    }
+
+    private fun showCustomerNameDialog() {
+        val input = EditText(this).apply {
+            hint = "Masukkan nama pemesan"
+            setSingleLine(true)
+        }
+
+        val container = FrameLayout(this).apply {
+            val params = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT
+            )
+            params.setMargins(60, 20, 60, 10)
+            layoutParams = params
+            addView(input)
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle("Nama Pemesan")
+            .setMessage("Silakan masukkan nama pemesan:")
+            .setView(container)
+            .setPositiveButton("Konfirmasi") { _, _ ->
+                val name = input.text.toString().trim()
+                if (name.isEmpty()) {
+                    Toast.makeText(this, "Nama pemesan tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                } else {
+                    val newOrder = OrderModel(
+                        id = OrderRepository.orderList.size + 1,
+                        customerName = name,
+                        menuName = menuName,
+                        unitPrice = unitPrice,
+                        quantity = currentQty,
+                        isMember = rbMember.isChecked,
+                        discountAmount = currentDiscount,
+                        grandTotal = currentGrandTotal
+                    )
+                    OrderRepository.addOrder(newOrder)
+
+                    val intent = Intent(this, OrderListActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }
+            .setNegativeButton("Batal", null)
+            .show()
     }
 
     companion object {

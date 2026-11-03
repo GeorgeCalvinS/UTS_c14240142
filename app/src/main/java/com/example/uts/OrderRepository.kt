@@ -6,4 +6,10 @@ object OrderRepository {
         MenuItemModel(2, "Matcha Frappe", "Frappe", 32000, "Green tea blended dengan es krim", R.drawable.ic_frappe),
         MenuItemModel(3, "Signature Tuna Bowl", "Makanan", 45000, "Tuna segar dengan nasi dan sayuran", R.drawable.ic_fastfood)
     )
+
+    val orderList: MutableList<OrderModel> = mutableListOf()
+
+    fun addOrder(order: OrderModel) {
+        orderList.add(0, order)
+    }
 }
