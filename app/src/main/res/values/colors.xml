@@ -2,4 +2,21 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="cafe_primary">#5D4037</color>
+    <color name="cafe_primary_dark">#3E2723</color>
+    <color name="cafe_accent">#C78D4E</color>
+    <color name="cafe_bg">#F8F5F0</color>
+    <color name="cafe_surface">#FFFFFF</color>
+    <color name="cafe_surface_variant">#F2EDE6</color>
+    <color name="cafe_text_title">#2C1D11</color>
+    <color name="cafe_text_subtitle">#7D6E68</color>
+    <color name="cafe_text_body">#5C4D44</color>
+    <color name="cafe_text_muted">#8D7F77</color>
+    <color name="cafe_border">#E2DACF</color>
+    <color name="cafe_divider">#EDE7DE</color>
+    <color name="cafe_accent_light">#FAEDCD</color>
+    <color name="cafe_green">#2E7D32</color>
+    <color name="cafe_green_light">#E8F5E9</color>
+    <color name="cafe_primary_container">#D7CCC8</color>
+    <color name="cafe_secondary">#8D6E63</color>
 </resources>
