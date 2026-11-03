@@ -1,10 +1,10 @@
 package com.example.uts
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -36,7 +36,13 @@ class MainActivity : AppCompatActivity() {
         lvMenu.setOnItemClickListener { _, _, position, _ ->
             val adapter = lvMenu.adapter as MenuAdapter
             val item = adapter.getItem(position)
-            Toast.makeText(this, "Dipilih: ${item?.name}", Toast.LENGTH_SHORT).show()
+            if (item != null) {
+                val intent = Intent(this, OrderActivity::class.java).apply {
+                    putExtra(OrderActivity.EXTRA_MENU_NAME, item.name)
+                    putExtra(OrderActivity.EXTRA_MENU_PRICE, item.price)
+                }
+                startActivity(intent)
+            }
         }
     }
 
