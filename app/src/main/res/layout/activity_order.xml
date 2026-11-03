@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/orderRoot"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/orderRoot"
     android:orientation="vertical"
     android:background="@color/cafe_bg"
     tools:context=".OrderActivity">
@@ -18,9 +18,9 @@
         android:gravity="center_vertical">
 
         <ImageButton
-            android:id="@+id/btnBack"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:id="@+id/btnBack"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_arrow_back"
             app:tint="@color/white" />
@@ -62,9 +62,9 @@
             android:padding="16dp">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardMenuDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/cardMenuDetail"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/cafe_surface">
@@ -82,9 +82,9 @@
                         android:background="@drawable/bg_icon_container">
 
                         <ImageView
-                            android:id="@+id/imgOrderMenuIcon"
                             android:layout_width="32dp"
                             android:layout_height="32dp"
+                            android:id="@+id/imgOrderMenuIcon"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_coffee" />
                     </FrameLayout>
@@ -97,18 +97,18 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/tvOrderMenuName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/tvOrderMenuName"
                             android:text="Nama Menu"
                             android:textColor="@color/cafe_text_title"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/tvOrderUnitPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/tvOrderUnitPrice"
                             android:layout_marginTop="6dp"
                             android:text="Rp0 / porsi"
                             android:textColor="@color/cafe_green"
@@ -119,9 +119,9 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardQty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/cardQty"
                 android:layout_marginTop="16dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp"
@@ -149,17 +149,17 @@
                         android:gravity="center_vertical">
 
                         <ImageButton
-                            android:id="@+id/btnMinus"
                             android:layout_width="44dp"
                             android:layout_height="44dp"
+                            android:id="@+id/btnMinus"
                             android:background="@drawable/bg_badge_category"
                             android:src="@drawable/ic_remove"
                             app:tint="@color/cafe_primary" />
 
                         <EditText
-                            android:id="@+id/etQty"
                             android:layout_width="80dp"
                             android:layout_height="48dp"
+                            android:id="@+id/etQty"
                             android:layout_marginStart="12dp"
                             android:layout_marginEnd="12dp"
                             android:gravity="center"
@@ -170,9 +170,9 @@
                             android:textStyle="bold" />
 
                         <ImageButton
-                            android:id="@+id/btnPlus"
                             android:layout_width="44dp"
                             android:layout_height="44dp"
+                            android:id="@+id/btnPlus"
                             android:background="@drawable/bg_badge_category"
                             android:src="@drawable/ic_add"
                             app:tint="@color/cafe_primary" />
@@ -189,9 +189,9 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardMember"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/cardMember"
                 android:layout_marginTop="16dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp"
@@ -212,28 +212,132 @@
                         android:textStyle="bold" />
 
                     <RadioGroup
-                        android:id="@+id/rgMember"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/rgMember"
                         android:layout_marginTop="8dp">
 
                         <RadioButton
-                            android:id="@+id/rbNonMember"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:id="@+id/rbNonMember"
                             android:checked="true"
                             android:text="Bukan Member"
                             android:textColor="@color/cafe_text_body"
                             android:textSize="14sp" />
 
                         <RadioButton
-                            android:id="@+id/rbMember"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:id="@+id/rbMember"
                             android:text="Member (Diskon 10%)"
                             android:textColor="@color/cafe_text_body"
                             android:textSize="14sp" />
                     </RadioGroup>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cardSummary"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/cafe_surface">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rincian Pembayaran"
+                        android:textColor="@color/cafe_text_title"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Subtotal"
+                            android:textColor="@color/cafe_text_subtitle"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvSubtotal"
+                            android:text="Rp0"
+                            android:textColor="@color/cafe_text_title"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Diskon Member (10%)"
+                            android:textColor="@color/cafe_text_subtitle"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvDiscount"
+                            android:text="Rp0"
+                            android:textColor="@color/cafe_accent"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="@color/cafe_divider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Total Pembayaran Akhir"
+                            android:textColor="@color/cafe_text_title"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvGrandTotal"
+                            android:text="Rp0"
+                            android:textColor="@color/cafe_green"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

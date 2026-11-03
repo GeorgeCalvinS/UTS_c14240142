@@ -1,6 +1,8 @@
 package com.example.uts
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -24,6 +26,9 @@ class OrderActivity : AppCompatActivity() {
     private lateinit var rgMember: RadioGroup
     private lateinit var rbNonMember: RadioButton
     private lateinit var rbMember: RadioButton
+    private lateinit var tvSubtotal: TextView
+    private lateinit var tvDiscount: TextView
+    private lateinit var tvGrandTotal: TextView
 
     private var menuName: String = ""
     private var unitPrice: Int = 0
@@ -49,6 +54,9 @@ class OrderActivity : AppCompatActivity() {
         rgMember = findViewById(R.id.rgMember)
         rbNonMember = findViewById(R.id.rbNonMember)
         rbMember = findViewById(R.id.rbMember)
+        tvSubtotal = findViewById(R.id.tvSubtotal)
+        tvDiscount = findViewById(R.id.tvDiscount)
+        tvGrandTotal = findViewById(R.id.tvGrandTotal)
 
         menuName = intent.getStringExtra(EXTRA_MENU_NAME) ?: ""
         unitPrice = intent.getIntExtra(EXTRA_MENU_PRICE, 0)
@@ -77,6 +85,34 @@ class OrderActivity : AppCompatActivity() {
             currentQty++
             etQty.setText(currentQty.toString())
         }
+
+        etQty.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                val inputQty = s?.toString()?.toIntOrNull() ?: 0
+                currentQty = inputQty
+                calculateTotal()
+            }
+        })
+
+        rgMember.setOnCheckedChangeListener { _, _ ->
+            calculateTotal()
+        }
+
+        calculateTotal()
+    }
+
+    private fun calculateTotal() {
+        val qty = etQty.text.toString().toIntOrNull() ?: 0
+        val subtotal = unitPrice * qty
+        val isMember = rbMember.isChecked
+        val discount = if (isMember) (subtotal * 0.10).toInt() else 0
+        val grandTotal = subtotal - discount
+
+        tvSubtotal.text = CurrencyHelper.formatRupiah(subtotal)
+        tvDiscount.text = if (discount > 0) "- ${CurrencyHelper.formatRupiah(discount)}" else "Rp0"
+        tvGrandTotal.text = CurrencyHelper.formatRupiah(grandTotal)
     }
 
     companion object {
